@@ -10,6 +10,7 @@ class PackagesAndCommands(Base):
     id = Column("id", Integer, primary_key=True)
     package_name = Column("package_name", String(50), unique=True, nullable=False)
     package_desc = Column("package_desc", Text, nullable=True)
+    slug = Column("slug", String(50), nullable=True)
     command_debian = Column("command_debian", Text, nullable=False)
     command_fedora = Column("command_fedora", Text, nullable=False)
 
