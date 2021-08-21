@@ -38,3 +38,64 @@ class CommandLineActions:
         # execption that might occur when you getting field_names but the data_objects list is empty(nothing in the database)
         except IndexError:
             return {}
+
+    def validate_console_input(self, console_message=None, value=None, min=2, max=25):
+        while True:
+            user_input = console.input(console_message)
+            if user_input == "":
+                console.print(
+                    f"[bold]{value} cannot be empty string. Try again[/]",
+                    style="#FF4848 on black",
+                )
+                continue
+            elif len(user_input) < min or len(user_input) > max:
+                console.print(
+                    f"[bold #FF4848]{value} must be between f{min} - {max} characters long. Try again[/]",
+                    style="#FF4848 on black",
+                )
+                continue
+            return user_input
+
+    def get_option_2_data(self):
+        """
+        Runs when option 2 is selected to Collect data from console input.
+        @return: A python dictionary containing key/value pair of the package data to save to the database.
+        @rtype: dict
+        """
+        package_name = self.validate_console_input(
+            value="package_name",
+            console_message="[bold #64C9CF]Enter the name of the Package:[/] \n [bold #64C9CF]>>> [/]",
+            min=2,
+            max=20
+        )
+        package_desc = self.validate_console_input(
+            value="package_desc",
+            console_message="[bold #64C9CF]Enter a brief description of the Package:[/] \n [bold #64C9CF]>>> [/]",
+            min=5,
+            max=50
+        )
+        slug = self.validate_console_input(
+            value="package_name",
+            console_message="[bold #64C9CF]Enter the slug to refer the Package:[/] \n [bold #64C9CF]>>> [/]",
+            min=2,
+            max=20
+        )
+        command_debian = self.validate_console_input(
+            value="command_debian",
+            console_message=f"[bold #64C9CF]Enter the command for installing {package_name} on [i]Debian[/i]:[/] \n [bold #64C9CF]>>> [/]",
+            min=2,
+            max=20
+        )
+        command_fedora = self.validate_console_input(
+            value="command_debian",
+            console_message=f"[bold #64C9CF]Enter the command for installing {package_name} on [i]Fedora[/i]:[/] \n [bold #64C9CF]>>> [/]",
+            min=2,
+            max=20
+        )
+        return {
+            "package_name": package_name,
+            "package_desc": package_desc,
+            "slug": slug,
+            "command_debian": command_debian,
+            "command_fedora": command_fedora
+        }
