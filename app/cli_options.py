@@ -73,7 +73,23 @@ class PrintCommandLineOptions:
         """
         Prints out text for option 2 in the command line interface.
         """
-        pass
+        console.print(
+            Panel(
+                f"""
+                Follow the prompts:
+                [bold ] 
+                package_name e.g [i]VLC media player
+                package_desc e.g [i]A media player
+                slug e.g [i]vlc
+                command_debian e.g [i]apt install vlc
+                command_fedora e.g [i]dnf install vlc
+                [/]
+                """,
+                style="#50CB93",
+                title="[bold cyan]Add package to database[/]",
+                box=box.HEAVY,
+            )
+        )
 
     def option_3(self):
         """

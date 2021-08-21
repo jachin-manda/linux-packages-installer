@@ -8,6 +8,7 @@ cli_actions = CommandLineActions()
 
 def main():
     cli_options.print_main_menu_panel()
+    cli_options.option_2()
 
 
 if __name__ == "__main__":
