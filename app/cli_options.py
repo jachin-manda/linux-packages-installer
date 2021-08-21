@@ -56,16 +56,18 @@ class PrintCommandLineOptions:
         table.add_column("Command Debian")
         table.add_column("Command Fedora")
 
-        table = Table()
         for row_data in table_data:
             table.add_row(
-                row_data["id"],
+                str(
+                    row_data["id"]
+                ),  # convert to string to avoid NotRenderableError exception
                 row_data["package_name"],
                 row_data["package_desc"],
                 row_data["slug"],
                 row_data["command_debian"],
                 row_data["command_fedora"],
             )
+        console.print(table)
 
     def option_2(self):
         """

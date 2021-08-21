@@ -6,7 +6,7 @@ from rich.table import Table
 from rich.panel import Panel
 
 
-engine = create_engine("sqlite+pysqlite:///./database.sqlite3", future=True)
+engine = create_engine("sqlite+pysqlite:///./db.sqlite3", future=True)
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
 session = Session()
