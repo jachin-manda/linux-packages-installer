@@ -2,7 +2,7 @@
 This is an application for automating the installation of Linux packages after a fresh/new install of the operating system.
 ## Application status
 - [x] Make it work   :heavy_check_mark:
-- [ ] Make it Right  :thumbsup:
+- [ ] Make it Right  (not yet)
 
 ### How to install
 Ensure python is installed. This is only working on Debian and Fedora linux distros.
