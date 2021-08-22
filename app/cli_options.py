@@ -1,5 +1,4 @@
 from rich.panel import Panel
-from rich.table import Table
 from rich import box
 from app import console
 
@@ -110,3 +109,4 @@ class PrintCommandLineOptions:
                 title="[bold cyan r]Go to Main Menu?[/]",
             )
         )
+
