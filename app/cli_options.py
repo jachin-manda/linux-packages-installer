@@ -123,7 +123,7 @@ class PrintCommandLineOptions:
                 2. Main menu[/]
                 """,
                 style="#50CB93",
-                title="[bold cyan r]Update package in the database[/]",
+                title="[bold cyan r]Delete package in the database[/]",
             )
         )
 
