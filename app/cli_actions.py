@@ -39,6 +39,26 @@ class CommandLineActions:
         except IndexError:
             return {}
 
+    def package_is_in_db(self, pkg):
+        """
+        Check if the package exists in the database.
+        @param pkg: attribute used to query the package in the database
+        @type pkg: string
+        @return: True if exists in database else False
+        @rtype: bool
+        """
+        query = session.query(PackagesAndCommands)
+        try:
+            package_data = query.get(int(pkg))
+
+        # Catch error raised when converting pkg param to int to use as an id in the query fails, meaning pkg param is a
+        # package name or slug.
+        except ValueError:
+            package_data = query.filter_by(package_name=pkg).first() or query.filter_by(slug=pkg).first()
+        if package_data:
+            return True
+        return False
+
     def validate_console_input(self, console_message=None, value=None, min=2, max=25):
         while True:
             user_input = console.input(console_message)
