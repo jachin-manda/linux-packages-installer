@@ -134,7 +134,8 @@ class ConsoleInputData:
             pkg_to_query = console.input(
                 "Package name, ID or slug \n [bold #64C9CF]>>> [/]"
             )
-            if not self.package_is_in_db(pkg_to_query):
+            package_db_obj = self.package_is_in_db(pkg_to_query)
+            if not package_db_obj:
                 console.print(
                     f"[bold]{pkg_to_query} could not be found in the database. Try again[/]",
                     style="#FF4848 on black",
@@ -145,7 +146,7 @@ class ConsoleInputData:
             option = console.input("\n [bold #64C9CF]>>> [/]")
 
             if option == "1":
-                return self.get_option_2_data()
+                return package_db_obj, self.get_option_2_data()
 
             elif option == "2":
                 package_name = self.validate_console_input(
@@ -154,7 +155,7 @@ class ConsoleInputData:
                     min=2,
                     max=20,
                 )
-                return {"package_name": package_name}
+                return package_db_obj, {"package_name": package_name}
 
             elif option == "3":
                 package_desc = self.validate_console_input(
@@ -163,7 +164,7 @@ class ConsoleInputData:
                     min=5,
                     max=50,
                 )
-                return {"package_desc": package_desc}
+                return package_db_obj, {"package_desc": package_desc}
 
             elif option == "4":
                 slug = self.validate_console_input(
@@ -172,7 +173,7 @@ class ConsoleInputData:
                     min=2,
                     max=20,
                 )
-                return {"slug": slug}
+                return package_db_obj, {"slug": slug}
 
             elif option == "5":
                 command_debian = self.validate_console_input(
@@ -181,7 +182,7 @@ class ConsoleInputData:
                     min=2,
                     max=20,
                 )
-                return {"command_debian": command_debian}
+                return package_db_obj, {"command_debian": command_debian}
 
             elif option == "6":
                 command_fedora = self.validate_console_input(
@@ -190,7 +191,7 @@ class ConsoleInputData:
                     min=2,
                     max=20,
                 )
-                return {"command_fedora": command_fedora}
+                return package_db_obj, {"command_fedora": command_fedora}
 
             elif option == "7":
                 break
