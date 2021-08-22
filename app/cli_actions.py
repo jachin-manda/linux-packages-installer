@@ -213,13 +213,14 @@ class ConsoleInputData:
                 value="package to delete",
                 console_message="[bold #64C9CF]Package name, ID or slug:[/] \n [bold #64C9CF]>>> [/]"
             )
-            if not self.package_is_in_db(pkg_to_query):
+            package_db_obj = self.package_is_in_db(pkg_to_query)
+            if not package_db_obj:
                 console.print(
                     f"[bold]{pkg_to_query} could not be found in the database. Try again[/]",
                     style="#FF4848 on black",
                 )
                 continue
-            return self.package_is_in_db(pkg_to_query)
+            return package_db_obj
 
 
 class CommandOptionActions(ConsoleInputData):
@@ -297,3 +298,15 @@ class CommandOptionActions(ConsoleInputData):
         for field, value in data:
             setattr(package_to_update, field, value)
         session.commit()
+
+    def option_4_action(self):
+        """
+        Deletes package data to database
+        @return: None
+        @rtype: None
+        """
+        package_to_delete = self.get_option_4_data()
+        package_to_delete.delete()
+        session.commit()
+
+
