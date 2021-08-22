@@ -120,7 +120,7 @@ class CommandLineActions:
             "command_fedora": command_fedora,
         }
 
-    def get_option_4_data(self):
+    def get_option_3_data(self):
         """
         Runs when option 4 is selected to Collect data from console input.
         @return: A python dictionary containing key/value pair of the package data to save to the database.
