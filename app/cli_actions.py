@@ -2,7 +2,7 @@ from app import console, session
 from app.models import PackagesAndCommands
 
 
-class CommandLineActions:
+class ConsoleInputData:
     """
     Performs actions according to the option selected.
     """

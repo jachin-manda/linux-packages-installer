@@ -1,6 +1,5 @@
 from app import cli_actions
 from app.cli_options import PrintCommandLineOptions
-from app.cli_actions import CommandLineActions
 
 cli_options = PrintCommandLineOptions()
 
