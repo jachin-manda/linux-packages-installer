@@ -274,3 +274,14 @@ class CommandOptionActions(ConsoleInputData):
         """
         table = self.create_table()
         console.print(table)
+
+    def option_2_action(self):
+        """
+        Saves package data to database
+        @return: None
+        @rtype: None
+        """
+        data = self.get_option_2_data()
+        pkg_to_add = PackagesAndCommands(**data)
+        session.add(pkg_to_add)
+        session.commit()
