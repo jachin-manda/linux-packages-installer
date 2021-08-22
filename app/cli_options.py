@@ -48,7 +48,8 @@ class PrintCommandLineOptions:
         """
         table = Table()
 
-        # Create table Headers. This could be dynamic by getting the database table column names, but will use static values for now.
+        # Create table Headers. This could be dynamic by getting the database table column names, but will use static
+        # values for now.
         table.add_column("ID")
         table.add_column("Package Name")
         table.add_column("Package Description")
@@ -95,7 +96,21 @@ class PrintCommandLineOptions:
         """
         Prints out text for option 3 in the command line interface.
         """
-        pass
+        console.print(
+            Panel(
+                """[bold underline reverse]Update Package values[/] \n
+                [bold]1. To update all values
+                2. To update the Package name
+                3. To update the Package description
+                4. To update the slug value
+                5. To update the Package install command for Debian
+                6. To update the Package install command for Fedora
+                7. Main menu[/]
+                """,
+                style="#50CB93",
+                title="[bold cyan r]Update package in the database[/]",
+            )
+        )
 
     def option_4(self):
         """
