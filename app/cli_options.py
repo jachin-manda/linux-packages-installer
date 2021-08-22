@@ -99,7 +99,8 @@ class PrintCommandLineOptions:
         console.print(
             Panel(
                 """[bold underline reverse]Update Package values[/] \n
-                [bold]1. To update all values
+                [bold]
+                1. To update all values
                 2. To update the Package name
                 3. To update the Package description
                 4. To update the slug value

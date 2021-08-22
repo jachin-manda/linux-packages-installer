@@ -35,7 +35,7 @@ class CommandLineActions:
 
             return data
 
-        # execption that might occur when you getting field_names but the data_objects list is empty(nothing in the database)
+        # excecption that might occur when you getting field_names but the data_objects list is empty(nothing in the database)
         except IndexError:
             return {}
 
@@ -66,36 +66,111 @@ class CommandLineActions:
             value="package_name",
             console_message="[bold #64C9CF]Enter the name of the Package:[/] \n [bold #64C9CF]>>> [/]",
             min=2,
-            max=20
+            max=20,
         )
         package_desc = self.validate_console_input(
             value="package_desc",
             console_message="[bold #64C9CF]Enter a brief description of the Package:[/] \n [bold #64C9CF]>>> [/]",
             min=5,
-            max=50
+            max=50,
         )
         slug = self.validate_console_input(
             value="package_name",
             console_message="[bold #64C9CF]Enter the slug to refer the Package:[/] \n [bold #64C9CF]>>> [/]",
             min=2,
-            max=20
+            max=20,
         )
         command_debian = self.validate_console_input(
             value="command_debian",
             console_message=f"[bold #64C9CF]Enter the command for installing {package_name} on [i]Debian[/i]:[/] \n [bold #64C9CF]>>> [/]",
             min=2,
-            max=20
+            max=20,
         )
         command_fedora = self.validate_console_input(
             value="command_debian",
             console_message=f"[bold #64C9CF]Enter the command for installing {package_name} on [i]Fedora[/i]:[/] \n [bold #64C9CF]>>> [/]",
             min=2,
-            max=20
+            max=20,
         )
         return {
             "package_name": package_name,
             "package_desc": package_desc,
             "slug": slug,
             "command_debian": command_debian,
-            "command_fedora": command_fedora
+            "command_fedora": command_fedora,
         }
+
+    def get_option_4_data(self):
+        """
+        Runs when option 4 is selected to Collect data from console input.
+        @return: A python dictionary containing key/value pair of the package data to save to the database.
+        @rtype: dict
+        """
+        while True:
+            pkg_to_query = console.input("Package name, ID or slug \n [bold #64C9CF]>>> [/]")
+            if not self.package_is_in_db(pkg_to_query):
+                console.print(
+                    f"[bold]{pkg_to_query} could not be found in the database. Try again[/]",
+                    style="#FF4848 on black",
+                )
+                continue
+            break
+        while True:
+            option = console.input("\n [bold #64C9CF]>>> [/]")
+
+            if option == "1":
+                return self.get_option_2_data()
+
+            elif option == "2":
+                package_name = self.validate_console_input(
+                    value="package_name",
+                    console_message="[bold #64C9CF]Enter the name of the Package:[/] \n [bold #64C9CF]>>> [/]",
+                    min=2,
+                    max=20,
+                )
+                return {"package_name": package_name}
+
+            elif option == "3":
+                package_desc = self.validate_console_input(
+                    value="package_desc",
+                    console_message="[bold #64C9CF]Enter a brief description of the Package:[/] \n [bold #64C9CF]>>> [/]",
+                    min=5,
+                    max=50,
+                )
+                return {"package_desc": package_desc}
+
+            elif option == "4":
+                slug = self.validate_console_input(
+                    value="package_name",
+                    console_message="[bold #64C9CF]Enter the slug to refer the Package:[/] \n [bold #64C9CF]>>> [/]",
+                    min=2,
+                    max=20,
+                )
+                return {"slug": slug}
+
+            elif option == "5":
+                command_debian = self.validate_console_input(
+                    value="command_debian",
+                    console_message=f"[bold #64C9CF]Enter the command for installing the package on [i]Debian[/i]:[/] \n [bold #64C9CF]>>> [/]",
+                    min=2,
+                    max=20,
+                )
+                return {"command_debian": command_debian}
+
+            elif option == "6":
+                command_fedora = self.validate_console_input(
+                    value="command_debian",
+                    console_message=f"[bold #64C9CF]Enter the command for installing the package on [i]Fedora[/i]:[/] \n [bold #64C9CF]>>> [/]",
+                    min=2,
+                    max=20,
+                )
+                return {"command_fedora": command_fedora}
+
+            elif option == "7":
+                break
+            else:
+                console.print(
+                    f"[bold]Invalid option selected. Try again[/]",
+                    style="#FF4848 on black",
+                )
+                continue
