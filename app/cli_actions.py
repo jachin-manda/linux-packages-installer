@@ -265,3 +265,12 @@ class CommandOptionActions(ConsoleInputData):
                 row_data["command_fedora"],
             )
         return table
+
+    def option_1_action(self):
+        """
+        Print a table of all Packages saved int he database.
+        @return: None
+        @rtype: None
+        """
+        table = self.create_table()
+        console.print(table)
