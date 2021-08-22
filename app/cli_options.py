@@ -116,7 +116,16 @@ class PrintCommandLineOptions:
         """
         Prints out text for option 4 in the command line interface.
         """
-        pass
+        console.print(
+            Panel(
+                """[bold underline reverse]Delete Package[/] \n
+                [bold]1. To delete the Package, enter ID or Package name or Slug
+                2. Main menu[/]
+                """,
+                style="#50CB93",
+                title="[bold cyan r]Update package in the database[/]",
+            )
+        )
 
     def option_5(self):
         """
