@@ -44,7 +44,7 @@ class CommandLineActions:
         Check if the package exists in the database.
         @param pkg: attribute used to query the package in the database
         @type pkg: string
-        @return: True if exists in database else False
+        @return: package data if exists in database else False
         @rtype: bool
         """
         query = session.query(PackagesAndCommands)
@@ -59,10 +59,10 @@ class CommandLineActions:
                 or query.filter_by(slug=pkg).first()
             )
         if package_data:
-            return True
+            return package_data
         return False
 
-    def validate_console_input(self, console_message=None, value=None, min=2, max=25):
+    def validate_console_input(self, console_message=None, value=None, min=1, max=25):
         while True:
             user_input = console.input(console_message)
             if user_input == "":
@@ -125,7 +125,7 @@ class CommandLineActions:
 
     def get_option_3_data(self):
         """
-        Runs when option 4 is selected to Collect data from console input.
+        Runs when option 3 is selected to Collect data from console input.
         @return: A python dictionary containing key/value pair of the package data to save to the database.
         @rtype: dict
         """
@@ -199,3 +199,22 @@ class CommandLineActions:
                     style="#FF4848 on black",
                 )
                 continue
+
+    def get_option_4_data(self):
+        """
+        Runs when option 4 is selected to Collect data from console input.
+        @return: class
+        @rtype: <class 'PackagesAndCommands'>
+        """
+        while True:
+            pkg_to_query = self.validate_console_input(
+                value="package to delete",
+                console_message="[bold #64C9CF]Package name, ID or slug:[/] \n [bold #64C9CF]>>> [/]"
+            )
+            if not self.package_is_in_db(pkg_to_query):
+                console.print(
+                    f"[bold]{pkg_to_query} could not be found in the database. Try again[/]",
+                    style="#FF4848 on black",
+                )
+                continue
+            return self.package_is_in_db(pkg_to_query)
