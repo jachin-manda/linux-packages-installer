@@ -11,34 +11,12 @@ class ConsoleInputData:
     def get_option_1_table_data(self):
         """
         Queries the data of all the packages saved in the database, then create a dictionary with data that will be used in rendering a table.
-        returns: list
-        for example data = [
-            {"id": ..., "package_name": ..., "package_desc": ..., "slug": ..., "command_debian": ..., "command_fedora": ...}
-        ]
+        returns: class objects represent each row of data in the database
         """
         # query all data
         data_objects = session.query(PackagesAndCommands).all()
 
-        try:
-            # get names of the database Table column/field names to be used as key in the row_data dict
-            field_names = (
-                data_objects[0].metadata.tables["packages_and_commands"].columns.keys()
-            )
-
-            data = []
-            row_data = {}
-
-            for obj in data_objects:
-                for field_name in field_names:
-                    row_data[field_name] = getattr(obj, field_name)
-                data.append(row_data)
-            console.print(data)
-
-            return data
-
-        # excecption that might occur when you getting field_names but the data_objects list is empty(nothing in the database)
-        except IndexError:
-            return {}
+        return data_objects
 
     def package_is_in_db(self, pkg):
         """
@@ -258,13 +236,13 @@ class CommandOptionActions(ConsoleInputData):
         for row_data in table_data:
             table.add_row(
                 str(
-                    row_data["id"]
+                    row_data.id
                 ),  # convert to string to avoid NotRenderableError exception
-                row_data["package_name"],
-                row_data["package_desc"],
-                row_data["slug"],
-                row_data["command_debian"],
-                row_data["command_fedora"],
+                row_data.package_name,
+                row_data.package_desc,
+                row_data.slug,
+                row_data.command_debian,
+                row_data.command_fedora,
             )
         return table
 
