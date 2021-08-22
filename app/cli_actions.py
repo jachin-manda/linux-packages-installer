@@ -286,3 +286,14 @@ class CommandOptionActions(ConsoleInputData):
         pkg_to_add = PackagesAndCommands(**data)
         session.add(pkg_to_add)
         session.commit()
+
+    def option_3_action(self):
+        """
+        Updates package data to database
+        @return: None
+        @rtype: None
+        """
+        package_to_update, data = self.get_option_3_data()
+        for field, value in data:
+            setattr(package_to_update, field, value)
+        session.commit()
