@@ -137,4 +137,12 @@ class PrintCommandLineOptions:
         """
         Prints out text for option 6 in the command line interface.
         """
-        pass
+        console.print(
+            Panel(
+                """[bold underline reverse]Are you sure you want to quit?[/] \n
+                Type [b]yes[/] or [b]no[/]
+                """,
+                style="#50CB93",
+                title="[bold cyan r]Go to Main Menu?[/]",
+            )
+        )
