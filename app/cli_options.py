@@ -31,44 +31,7 @@ class PrintCommandLineOptions:
         )
 
     def option_1(self, table_data):
-        """Print out a Table of all the Packages saved to the database.
-
-        Args:
-            table_data (list): A list containing the data for each package from the database
-            for example: table_data =  [
-                {
-                    "id": 1,
-                    "package_name": "VLC",
-                    "package_desc": "A media player",
-                    "slug": "vlc",
-                    "command_debian": ["apt install vlc"],
-                    "command_fedora": ["dnf install vlc"]
-                }
-            ]
-        """
-        table = Table()
-
-        # Create table Headers. This could be dynamic by getting the database table column names, but will use static
-        # values for now.
-        table.add_column("ID")
-        table.add_column("Package Name")
-        table.add_column("Package Description")
-        table.add_column("Slug")
-        table.add_column("Command Debian")
-        table.add_column("Command Fedora")
-
-        for row_data in table_data:
-            table.add_row(
-                str(
-                    row_data["id"]
-                ),  # convert to string to avoid NotRenderableError exception
-                row_data["package_name"],
-                row_data["package_desc"],
-                row_data["slug"],
-                row_data["command_debian"],
-                row_data["command_fedora"],
-            )
-        console.print(table)
+        pass
 
     def option_2(self):
         """
