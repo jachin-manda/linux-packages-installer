@@ -1,6 +1,10 @@
 from rich.table import Table
 from app import console, session
+from app.cli_options import PrintCommandLineOptions
 from app.models import PackagesAndCommands
+
+
+cli_options = PrintCommandLineOptions()
 
 
 class ConsoleInputData:
@@ -74,25 +78,25 @@ class ConsoleInputData:
             value="package_desc",
             console_message="[bold #64C9CF]Enter a brief description of the Package:[/] \n [bold #64C9CF]>>> [/]",
             min=5,
-            max=50,
+            max=300,
         )
         slug = self.validate_console_input(
             value="package_name",
             console_message="[bold #64C9CF]Enter the slug to refer the Package:[/] \n [bold #64C9CF]>>> [/]",
             min=2,
-            max=20,
+            max=30,
         )
         command_debian = self.validate_console_input(
             value="command_debian",
             console_message=f"[bold #64C9CF]Enter the command for installing {package_name} on [i]Debian[/i]:[/] \n [bold #64C9CF]>>> [/]",
             min=2,
-            max=20,
+            max=1000,
         )
         command_fedora = self.validate_console_input(
             value="command_debian",
             console_message=f"[bold #64C9CF]Enter the command for installing {package_name} on [i]Fedora[/i]:[/] \n [bold #64C9CF]>>> [/]",
             min=2,
-            max=20,
+            max=1000,
         )
         return {
             "package_name": package_name,
@@ -121,7 +125,8 @@ class ConsoleInputData:
                 continue
             break
         while True:
-            option = console.input("\n [bold #64C9CF]>>> [/]")
+            cli_options.print_option_3()
+            option = console.input("\nSelect Option [bold #64C9CF]>>> [/]")
 
             if option == "1":
                 return package_db_obj, self.get_option_2_data()
@@ -158,7 +163,7 @@ class ConsoleInputData:
                     value="command_debian",
                     console_message=f"[bold #64C9CF]Enter the command for installing the package on [i]Debian[/i]:[/] \n [bold #64C9CF]>>> [/]",
                     min=2,
-                    max=20,
+                    max=1000,
                 )
                 return package_db_obj, {"command_debian": command_debian}
 
@@ -167,7 +172,7 @@ class ConsoleInputData:
                     value="command_debian",
                     console_message=f"[bold #64C9CF]Enter the command for installing the package on [i]Fedora[/i]:[/] \n [bold #64C9CF]>>> [/]",
                     min=2,
-                    max=20,
+                    max=1000,
                 )
                 return package_db_obj, {"command_fedora": command_fedora}
 
@@ -273,7 +278,7 @@ class CommandOptionActions(ConsoleInputData):
         @rtype: None
         """
         package_to_update, data = self.get_option_3_data()
-        for field, value in data:
+        for field, value in data.items():
             setattr(package_to_update, field, value)
         session.commit()
 

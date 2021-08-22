@@ -15,15 +15,18 @@ def get_main_menu_input():
             cli_action.option_1_action()
 
         elif user_input == "2":
+            cli_options.print_option_2()
             cli_action.option_2_action()
 
         elif user_input == "3":
             cli_action.option_3_action()
 
         elif user_input == "4":
+            cli_options.print_option_4()
             cli_action.option_4_action()
 
         elif user_input == "5":
+            cli_options.print_option_5()
             cli_action.option_5_action()
 
         elif user_input == "6":
