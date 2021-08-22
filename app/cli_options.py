@@ -30,10 +30,10 @@ class PrintCommandLineOptions:
             )
         )
 
-    def option_1(self, table_data):
+    def print_option_1(self, table_data):
         pass
 
-    def option_2(self):
+    def print_option_2(self):
         """
         Prints out text for option 2 in the command line interface.
         """
@@ -55,7 +55,7 @@ class PrintCommandLineOptions:
             )
         )
 
-    def option_3(self):
+    def print_option_3(self):
         """
         Prints out text for option 3 in the command line interface.
         """
@@ -76,7 +76,7 @@ class PrintCommandLineOptions:
             )
         )
 
-    def option_4(self):
+    def print_option_4(self):
         """
         Prints out text for option 4 in the command line interface.
         """
@@ -91,13 +91,13 @@ class PrintCommandLineOptions:
             )
         )
 
-    def option_5(self):
+    def print_option_5(self):
         """
         Prints out text for option 5 in the command line interface.
         """
         pass
 
-    def option_6(self):
+    def print_option_6(self):
         """
         Prints out text for option 6 in the command line interface.
         """
