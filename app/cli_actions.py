@@ -54,7 +54,10 @@ class CommandLineActions:
         # Catch error raised when converting pkg param to int to use as an id in the query fails, meaning pkg param is a
         # package name or slug.
         except ValueError:
-            package_data = query.filter_by(package_name=pkg).first() or query.filter_by(slug=pkg).first()
+            package_data = (
+                query.filter_by(package_name=pkg).first()
+                or query.filter_by(slug=pkg).first()
+            )
         if package_data:
             return True
         return False
@@ -127,7 +130,9 @@ class CommandLineActions:
         @rtype: dict
         """
         while True:
-            pkg_to_query = console.input("Package name, ID or slug \n [bold #64C9CF]>>> [/]")
+            pkg_to_query = console.input(
+                "Package name, ID or slug \n [bold #64C9CF]>>> [/]"
+            )
             if not self.package_is_in_db(pkg_to_query):
                 console.print(
                     f"[bold]{pkg_to_query} could not be found in the database. Try again[/]",
