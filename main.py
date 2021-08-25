@@ -27,7 +27,8 @@ def get_main_menu_input():
 
         elif user_input == "5":
             cli_options.print_option_5()
-            cli_action.option_5_action()
+            linux_sys = cli_action.get_option_5_data()
+            cli_action.option_5_action(linux_sys)
 
         elif user_input == "6":
             awaiting_input = True
@@ -52,8 +53,6 @@ def get_main_menu_input():
                 style="#FF4848 on black",
             )
             continue
-
-
 
 
 def main():

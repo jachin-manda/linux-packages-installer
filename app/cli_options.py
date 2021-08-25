@@ -77,7 +77,7 @@ class PrintCommandLineOptions:
 
     def print_option_4(self):
         """
-        Prints out text for option 4 in the command line interface.
+        Prints out text for option 5 in the command line interface.
         """
         console.print(
             Panel(
@@ -92,9 +92,19 @@ class PrintCommandLineOptions:
 
     def print_option_5(self):
         """
-        Prints out text for option 5 in the command line interface.
+        Prints out text for option 4 in the command line interface.
         """
-        pass
+        console.print(
+            Panel(
+                """[bold underline reverse]Select the system you are using[/] \n
+                [bold]
+                1. Debian
+                2. Fedora
+                """,
+                style="#50CB93",
+                title="[bold cyan r]Linux Distribution[/]",
+            )
+        )
 
     def print_option_6(self):
         """

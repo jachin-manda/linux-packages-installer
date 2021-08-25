@@ -2,7 +2,7 @@ from rich.table import Table
 from app import console, session
 from app.cli_options import PrintCommandLineOptions
 from app.models import PackagesAndCommands
-
+from app.package_install import PackageInstaller
 
 cli_options = PrintCommandLineOptions()
 
@@ -205,6 +205,18 @@ class ConsoleInputData:
                 continue
             return package_db_obj
 
+    def get_option_5_data(self):
+        while True:
+            linux_sys = self.validate_console_input(value="Linux system name",
+                                                    console_message="Select the linux distribution.")
+            if linux_sys == "1":
+                return "debian"
+            elif linux_sys == "2":
+                return "fedora"
+            else:
+                console.print(f"[bold]Invalid option. Try again[/]",
+                              style="#FF4848 on black")
+
 
 class CommandOptionActions(ConsoleInputData):
     """
@@ -292,7 +304,14 @@ class CommandOptionActions(ConsoleInputData):
         package_to_delete.delete()
         session.commit()
 
-    def option_5_action(self):
-        pass
-
+    def option_5_action(self, linux_sys):
+        """
+        Installs packages by calling the install package method
+        """
+        pkgs_data = session.query(PackagesAndCommands).all()
+        for package in pkgs_data:
+            pkg_to_install = PackageInstaller(pkg_name=package.package_name, pkg_slug=package.slug,
+                                              command=package.command_debian if linux_sys == "debian" else package.command_fedora)
+            pkg_to_install.install_package()
+            console.print("[reversed] Finished")
 
