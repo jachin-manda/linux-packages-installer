@@ -119,4 +119,3 @@ class PrintCommandLineOptions:
                 title="[bold cyan r]Go to Main Menu?[/]",
             )
         )
-

@@ -194,7 +194,7 @@ class ConsoleInputData:
         while True:
             pkg_to_query = self.validate_console_input(
                 value="package to delete",
-                console_message="[bold #64C9CF]Package name, ID or slug:[/] \n [bold #64C9CF]>>> [/]"
+                console_message="[bold #64C9CF]Package name, ID or slug:[/] \n [bold #64C9CF]>>> [/]",
             )
             package_db_obj = self.package_is_in_db(pkg_to_query)
             if not package_db_obj:
@@ -207,37 +207,41 @@ class ConsoleInputData:
 
     def get_option_5_data(self):
         while True:
-            linux_sys = self.validate_console_input(value="Linux system name",
-                                                    console_message="Select the linux distribution.")
+            linux_sys = self.validate_console_input(
+                value="Linux system name",
+                console_message="Select the linux distribution.",
+            )
             if linux_sys == "1":
                 return "debian"
             elif linux_sys == "2":
                 return "fedora"
             else:
-                console.print(f"[bold]Invalid option. Try again[/]",
-                              style="#FF4848 on black")
+                console.print(
+                    f"[bold]Invalid option. Try again[/]", style="#FF4848 on black"
+                )
 
 
 class CommandOptionActions(ConsoleInputData):
     """
     Execute actions based on option selected
     """
+
     def create_table(self):
         """Print out a Table of all the Packages saved to the database.
 
-                Args:
-                    table_data (list): A list containing the data for each package from the database
-                    for example: table_data =  [
-                        {
-                            "id": 1,
-                            "package_name": "VLC",
-                            "package_desc": "A media player",
-                            "slug": "vlc",
-                            "command_debian": ["apt install vlc"],
-                            "command_fedora": ["dnf install vlc"]
-                        }
-                    ]
-                """
+        Args:
+            table_data (list): A list containing the data for each package from the database
+            for example: table_data =  [
+                {
+                    "id": 1,
+                    "package_name": "VLC",
+                    "package_desc": "A media player",
+                    "slug": "vlc",
+                    "command_debian": ["apt install vlc"],
+                    "command_fedora": ["dnf install vlc"]
+                }
+            ]
+        """
         table_data = self.get_option_1_table_data()
         table = Table()
 
@@ -310,8 +314,12 @@ class CommandOptionActions(ConsoleInputData):
         """
         pkgs_data = session.query(PackagesAndCommands).all()
         for package in pkgs_data:
-            pkg_to_install = PackageInstaller(pkg_name=package.package_name, pkg_slug=package.slug,
-                                              command=package.command_debian if linux_sys == "debian" else package.command_fedora)
+            pkg_to_install = PackageInstaller(
+                pkg_name=package.package_name,
+                pkg_slug=package.slug,
+                command=package.command_debian
+                if linux_sys == "debian"
+                else package.command_fedora,
+            )
             pkg_to_install.install_package()
             console.print("[reversed] Finished")
-
