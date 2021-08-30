@@ -9,11 +9,8 @@ class PackageInstaller:
         self.command = command
 
     def install_package(self):
-        console.print(
-            f"[reverse]Installing package {self.pkg_name} - {self.pkg_slug}[/]"
-        )
         with console.status(
-            f"[reverse]Installing package {self.pkg_name} - {self.pkg_slug}[/]",
+            f"[bold cyan reverse]Installing package {self.pkg_name} - {self.pkg_slug}[/]",
             spinner="point",
         ):
             subprocess.run(self.command, shell=True)
