@@ -38,10 +38,10 @@ class ConsoleInputData:
         # package name or slug.
         except ValueError:
             package_data = (
-                query.filter_by(package_name=pkg).first()
-                or query.filter_by(slug=pkg).first()
+                query.filter_by(package_name=pkg)
+                or query.filter_by(slug=pkg)
             )
-        if package_data:
+        if package_data.first():
             return package_data
         return False
 
