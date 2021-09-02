@@ -32,7 +32,7 @@ class ConsoleInputData:
         """
         query = session.query(PackagesAndCommands)
         try:
-            package_data = query.get(int(pkg))
+            package_data = query.filter_by(id=int(pkg))
 
         # Catch error raised when converting pkg param to int to use as an id in the query fails, meaning pkg param is a
         # package name or slug.
@@ -41,7 +41,7 @@ class ConsoleInputData:
                 query.filter_by(package_name=pkg)
                 or query.filter_by(slug=pkg)
             )
-        if package_data.first():
+        if package_data is not None:
             return package_data
         return False
 
