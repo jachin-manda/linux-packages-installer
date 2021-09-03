@@ -1,2 +1,2 @@
 rich==10.7.0
-SQLAlchemy==1.4.22
+SQLAlchemy==1.4.23
